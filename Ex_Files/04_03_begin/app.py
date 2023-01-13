@@ -22,8 +22,11 @@ def laureate_list():
     if not request.args.get("surname"):
         return jsonify(results)
 
-    # Your code here!
-    return "your code here!"
+    query = request.args.get("surname").lower().strip()
+    for l in laureates:
+        if query in l["surname"].lower():
+            results.append(l)
+    return jsonify(results)
 
 
 app.run(debug=True)
